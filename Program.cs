@@ -6,10 +6,14 @@ using System.Threading.Tasks;
 
 namespace LabsAutmnWinter
 {
-    class Program
+    class LabsAutmnWinter
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Начинаем приготовление");
+            Console.WriteLine("Берем мясо, лук, булку, молоко, масло, яйца и специи");
+
+
         }
     }
 }
