@@ -28,11 +28,11 @@ namespace laba2
             Pen pen = new Pen(selfColor);
             if (pipe)
             {
-                points[0] = new PointF(startX + 25, startY - 50);
-                points[1] = new PointF(startX + 25, startY - 60);
-                points[2] = new PointF(startX + 55, startY - 60);
-                points[3] = new PointF(startX + 55, startY - 50);
-                points[4] = new PointF(startX + 25, startY - 50);
+                points[0] = new PointF(startX + 25, startY - 40);
+                points[1] = new PointF(startX + 25, startY - 45);
+                points[2] = new PointF(startX + 55, startY - 45);
+                points[3] = new PointF(startX + 55, startY - 40);
+                points[4] = new PointF(startX + 25, startY - 40);
                 g.DrawPolygon(pen, points);
             }
             if (boats)
