@@ -4,15 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LabsAutmnWinter
+namespace Labs
 {
-    class Egg : Product
-    {
-        public bool isBroken;
-    
-        public Egg(int weight) : base(weight)
-        {
-            this.isBroken = false;
-        }
-    }
+	class Egg
+	{
+		public bool isBroken;
+		public bool isClean;
+	}
 }

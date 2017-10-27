@@ -1,19 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
-namespace LabsAutmnWinter
+namespace Labs
 {
-    class LabsAutmnWinter
-    {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Начинаем приготовление");
-            Console.WriteLine("Берем мясо, лук, булку, молоко, масло, яйца и специи");
-
-
-        }
-    }
+	static class Program
+	{
+		/// <summary>
+		/// The main entry point for the application.
+		/// </summary>
+		[STAThread]
+		static void Main()
+		{
+			Application.EnableVisualStyles();
+			Application.SetCompatibleTextRenderingDefault(false);
+			Application.Run(new Form1());
+		}
+	}
 }

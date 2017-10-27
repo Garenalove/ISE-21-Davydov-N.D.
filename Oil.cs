@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LabsAutmnWinter
+namespace Labs
 {
-    class Oil : Product
-    {
-        public Oil(int weight) : base(weight)
-        {
-        }
-    }
+	class Oil
+	{
+
+	}
 }

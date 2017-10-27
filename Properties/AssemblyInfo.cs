@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Общие сведения об этой сборке предоставляются следующим набором
 // набора атрибутов. Измените значения этих атрибутов, чтобы изменить сведения,
 // связанные со сборкой.
-[assembly: AssemblyTitle("LabsAutmnWinter")]
+[assembly: AssemblyTitle("labs")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("LabsAutmnWinter")]
+[assembly: AssemblyProduct("labs")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // Следующий GUID служит для идентификации библиотеки типов, если этот проект будет видимым для COM
-[assembly: Guid("98fc9c48-83d7-4c15-9c9d-b619ffe63d66")]
+[assembly: Guid("bb2528bc-c215-4870-82f7-8cfe7e698bee")]
 
 // Сведения о версии сборки состоят из следующих четырех значений:
 //

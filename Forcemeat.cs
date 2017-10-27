@@ -4,15 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LabsAutmnWinter
+namespace Labs
 {
-    class Forcemeat
-    {
-        public bool isCutlet;
-
-        public Forcemeat()
-        {
-            this.isCutlet = false;
-        }
-    }
+	class ForceMeat
+	{
+	}
 }

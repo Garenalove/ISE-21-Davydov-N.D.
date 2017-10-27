@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LabsAutmnWinter
+namespace Labs
 {
-    class Meat : RawProduct
-    {
-        public Meat(int weight) : base(weight)
-        {
-
-        }
-    }
+	class Meat
+	{
+		public int count { get; set; }
+		public bool isClean { get; set; }
+		public bool isCut { get; set; }
+	}
 }

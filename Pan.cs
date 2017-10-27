@@ -4,55 +4,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LabsAutmnWinter
+namespace Labs
 {
-    class Pan
-    {
-        public int temperature;
-        private Oil oil
-        {
-            set
-            {
-                if (value.weight >= 30 && value.weight < 50)
-                    this.oil = value;
-            }
-            get { return oil; }
-        }
-        private Forcemeat forcemeat
-        {
-            set
-            {
-                if (value.isCutlet)
-                    this.forcemeat = value;
-            }
-            get { return forcemeat;}
-        }
+	class Pan
+	{
+		public Oil oil { set; private get; }
+		public ForceMeat forceMeat { set; private get; }
+		public Cutlets cutlets { private set; get; }
+		public int temperature;
 
-        public Pan()
-        {
-            this.temperature = 25;
-        }
-        
-        public void addOil(Oil oil)
-        {
-            this.oil = oil;
-        }
-
-        public void addForcemeat(Forcemeat forcemeat)
-        {
-            this.forcemeat = forcemeat;
-        }
-
-        public Сutlet fry()
-        {
-            if (this.temperature >= 100 &&
-                this.oil != null &&
-                this.forcemeat != null)
-                return new Сutlet();
-            return null;
-
-        }
-        
-        
-    }
+		public void cook(int temperature)
+		{
+			this.temperature += temperature;
+			if (oil != null &&
+				forceMeat != null &&
+				temperature >= 100)
+			{
+				oil = null;
+				forceMeat = null;
+				cutlets = new Cutlets();
+			} else
+			{
+				cutlets =  null;
+			}
+		}
+		
+	}
 }
