@@ -11,7 +11,7 @@ namespace laba2
     {
         private bool pipe;
         private bool boats;
-		private Color selfColor;
+        private Color selfColor;
 
         public UltaMegaBuffSuperMotorShip(int maxSpeed, int maxCountPassenger, double weight, Color color,
             bool pipe, bool boats,Color selfColor) : base(maxSpeed, maxCountPassenger, weight, color)
@@ -21,7 +21,13 @@ namespace laba2
 			this.selfColor = selfColor;
         }
 
-		protected override void drawLightShip(Graphics g)
+        public void SetDopColor(Color color)
+        {
+            selfColor = color;
+        }
+
+
+        protected override void drawLightShip(Graphics g)
 		{
 			base.drawLightShip(g);
             PointF[] points = new PointF[5];
