@@ -8,9 +8,14 @@ namespace Labs
 {
 	class Crane
 	{
-		public void pomblt(Egg egg)
+		public void cleanEgg(Egg egg)
 		{
 			egg.isClean = true;
 		}
+        
+        public void cleanMeat(Meat meat)
+        {
+            meat.isClean = true;
+        }
 	}
 }

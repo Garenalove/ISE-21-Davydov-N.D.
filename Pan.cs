@@ -16,14 +16,15 @@ namespace Labs
 		public void cook(int temperature)
 		{
 			this.temperature += temperature;
-			if (oil != null &&
-				forceMeat != null &&
-				temperature >= 100)
+			if (this.oil != null &&
+				this.forceMeat != null &&
+				this.temperature >= 100)
 			{
 				oil = null;
 				forceMeat = null;
 				cutlets = new Cutlets();
-			} else
+			}
+            else
 			{
 				cutlets =  null;
 			}
