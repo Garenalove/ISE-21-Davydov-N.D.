@@ -11,7 +11,7 @@ namespace laba2
     {
         private bool pipe;
         private bool boats;
-		private Color selfColor;
+        private Color selfColor;
 
         public UltaMegaBuffSuperMotorShip(int maxSpeed, int maxCountPassenger, double weight, Color color,
             bool pipe, bool boats,Color selfColor) : base(maxSpeed, maxCountPassenger, weight, color)
@@ -21,7 +21,24 @@ namespace laba2
 			this.selfColor = selfColor;
         }
 
-		protected override void drawLightShip(Graphics g)
+        public UltaMegaBuffSuperMotorShip(string info) : base(info)
+        {
+            string[] strs = info.Split(';');
+            if(strs.Length == 7)
+            {
+                pipe = Convert.ToBoolean(strs[4]);
+                boats = Convert.ToBoolean(strs[5]);
+                selfColor = Color.FromName(strs[6]);
+            }
+        }
+
+        public void SetDopColor(Color color)
+        {
+            selfColor = color;
+        }
+
+
+        protected override void drawLightShip(Graphics g)
 		{
 			base.drawLightShip(g);
             PointF[] points = new PointF[5];
@@ -48,5 +65,11 @@ namespace laba2
                 g.DrawPolygon(pen, points);
             }
         }
-	}
+
+        public override string getInfo()
+        {
+            return MaxSpeed + ";" + MaxCountPassengers + ";" + Weight + ";" +
+                ColorBody.Name + ";" + pipe + ";" + boats + ";" + selfColor.Name;
+        }
+    }
 }

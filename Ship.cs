@@ -21,6 +21,8 @@ namespace laba2
 
         public abstract void drawShip(Graphics g);
 
+        public abstract string getInfo();
+
         public int getPassenger()
         {
             int count = countPassengers;
@@ -42,6 +44,11 @@ namespace laba2
         {
             startX = x;
             startY = y;
+        }
+
+        public void setMainColor(Color color)
+        {
+            ColorBody = color;
         }
     }
 }
