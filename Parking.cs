@@ -57,14 +57,12 @@ namespace laba2
 		public void Draw(Graphics g)
 		{
             DrawMaking(g);
-            for(int i = 0; i < countPlaces; i++)
+            int i = 0;
+            foreach(var ship in parkingStages[curentLvl])
             {
-                var car = parkingStages[curentLvl][i];
-                if (car != null)
-                {
-                    car.sePosition(10 + i / 5 * placeSizeWidth + 5, i % 5 * placeSizeHeight + 57);
-                    car.drawShip(g);
-                }
+                ship.sePosition(10 + i / 5 * placeSizeWidth + 5, i % 5 * placeSizeHeight + 57);
+                ship.drawShip(g);
+                i++;    
             }
 		}
 
@@ -192,6 +190,10 @@ namespace laba2
                 }
             }
             return true;
+        }
+        public void Sort()
+        {
+            parkingStages.Sort();
         }
     }
 }
