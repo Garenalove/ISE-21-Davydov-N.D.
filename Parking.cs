@@ -33,7 +33,7 @@ namespace laba2
                 curentLvl--;
             }
         }
-
+    
         public Parking(int lvls)
 		{
             parkingStages = new List<ClassArray<ITransport>>();
@@ -87,6 +87,8 @@ namespace laba2
                 g.DrawLine(pen, i * placeSizeWidth, 0, i * placeSizeWidth, 400);
             }
         }
+	}
+
 
         public bool SaveData(string fileName)
         {

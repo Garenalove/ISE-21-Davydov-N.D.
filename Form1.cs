@@ -11,164 +11,102 @@ using System.Windows.Forms;
 
 namespace laba2
 {
-    public partial class Form1 : Form
-    {
-        Parking port;
-        additionalForm addiForm;
-        Logger logger;
-        public Form1()
-        {
-            InitializeComponent();
-            port = new Parking(4);
-            for(int i=1; i<5; i++)
-            {
-                listBox1.Items.Add("Уровень " + i);
-            }
-            listBox1.SelectedIndex = port.getCurentLvl;
-            Draw();
-            logger = LogManager.GetCurrentClassLogger();
+	public partial class FormAerodrome : Form
+	{
+		Parking parking;
 
-        }
 
-        private void Draw()
-        {
-            if (listBox1.SelectedIndex > -1)
-            {
-                Bitmap bmp = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-                Graphics grf = Graphics.FromImage(bmp);
-                port.Draw(grf);
-                pictureBox1.Image = bmp;
-            }
-        }
 
-        private void TakeBoat_Click(object sender, EventArgs e)
-        {
-            if (listBox1.SelectedIndex > -1)
-            {
-                string stage = listBox1.Items[listBox1.SelectedIndex].ToString();
-                if (maskedTextBox1.Text != "")
-                {
-                    try
-                    {
-                        ITransport ship = port.GetShipInParking(Convert.ToInt32(maskedTextBox1.Text) - 1);
-                        Bitmap bmp = new Bitmap(pictureBox2.Width, pictureBox2.Height);
-                        Graphics gr = Graphics.FromImage(bmp);
-                        ship.sePosition(0, 80);
-                        ship.drawShip(gr);
-                        pictureBox2.Image = bmp;
-                        Draw();
-                        logger.Info("Корабль забран с места: " + Convert.ToInt32(maskedTextBox1.Text) +
-                            ". На уровне: " + port.getCurentLvl);
-                    }
-                    catch (DockIndexOutOfRangeException ex)
-                    {
-                        logger.Info(ex.Message);
-                        MessageBox.Show(ex.Message, "Неверный номер", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    catch(Exception ex)
-                    {
-                        logger.Info(ex.Message);
-                        MessageBox.Show(ex.Message, "Общая ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }
-        }
+		public FormAerodrome()
+		{
+			InitializeComponent();
+            parking = new Parking(5);
+			for (int i = 1; i < 6; i++)
+			{
+				listBoxLevels.Items.Add("Уровень " + i);
+			}
+			listBoxLevels.SelectedIndex = parking.getCurentLvl;
+			
+			draw();
+		}
 
-        private void nextBtn_Click(object sender, EventArgs e)
-        {
-            port.lvlUp();
-            listBox1.SelectedIndex = port.getCurentLvl;
-            logger.Info("Переход на уровень выше. Текущий уровень: " + port.getCurentLvl);
-            Draw();
-        }
+		public void draw()
+		{
+			if (listBoxLevels.SelectedIndex > -1)
+			{
+				Bitmap bmp = new Bitmap(pictureBoxAerodrome.Width, pictureBoxAerodrome.Height);
+				Graphics gr = Graphics.FromImage(bmp);
+                parking.Draw(gr);
+				pictureBoxAerodrome.Image = bmp;
+			}
+		}
 
-        private void previousBtn_Click(object sender, EventArgs e)
-        {
-            port.lvlDown();
-            listBox1.SelectedIndex = port.getCurentLvl;
-            Draw();
-            logger.Info("Переход на уровень ниже. Текущий уровень: " + port.getCurentLvl);
-        }
 
-        private void orderBtn_Click(object sender, EventArgs e)
-        {
-            addiForm = new additionalForm();
-            logger.Info("Начато создание коробля");
-            addiForm.AddEvent(addBoat);
-            addiForm.Show();
-        }
 
-        private void addBoat(ITransport boat) {
-            if (boat != null)
-            {
-                try
-                {
-                    int place = port.PutShipInParking(boat);
-                    Draw();
-                    MessageBox.Show("Ваше место:" + (place + 1));
-                    logger.Info("Корабль пришвартован на место: " + (place + 1));
-                }
-                catch (DockOverflowException ex)
-                {
-                    logger.Info(ex.Message);
-                    MessageBox.Show(ex.Message, "Ошибка переполнения", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                catch(DockAlreadyHaveException ex)
-                {
-                    logger.Info(ex.Message);
-                    MessageBox.Show(ex.Message, "Ошибка повтора", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                catch(Exception ex)
-                {
-                    logger.Info(ex.Message);
-                    MessageBox.Show(ex.Message, "Общая ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
+		private void butSetPlane_Click(object sender, EventArgs e)
+		{
+			ColorDialog dialog = new ColorDialog();
+			if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+			{
+				var plane = new MotorShip(1000, 100, 30, dialog.Color);
+                int place = parking.PutShipInParking(plane);
+				draw();
+				MessageBox.Show("Вашеместо: " + place);
 
-        private void сохранитьToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if(saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                if (port.SaveData(saveFileDialog1.FileName))
-                {
-                    logger.Info("Доки сохранены в файл: " + saveFileDialog1.FileName);
-                    MessageBox.Show("Сохранение прошло успешно", "",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    logger.Info("Неудалось сохранить доки в файл: " + saveFileDialog1.FileName);
-                    MessageBox.Show("Не сохранилось", "",
-                      MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
+			}
+		}
 
-        private void загрузитьToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if(openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                if (port.LoadData(openFileDialog1.FileName))
-                {
-                    logger.Info("Загружены доки из файла: " + openFileDialog1.FileName);
-                    Draw();
-                    MessageBox.Show("Загружено", "",
-                      MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    logger.Info("Неудалось загрузить доки из файла: " + openFileDialog1.FileName);
-                    MessageBox.Show("Ошибка", "",
-                      MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
+		private void butSetFigther_Click(object sender, EventArgs e)
+		{
+			ColorDialog dialog = new ColorDialog();
+			if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+			{
+				ColorDialog dialogDop = new ColorDialog();
+				if (dialogDop.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+				{
+					var plane = new UltaMegaBuffSuperMotorShip(1000, 100, 30, dialog.Color, true, true, dialogDop.Color);
+                    int place = parking.PutShipInParking(plane);
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            port.Sort();
-            Draw();
-        }
-    }
+                    draw();
+                    MessageBox.Show("Вашеместо: " + (place + 1));
+
+				}
+			}
+		}
+		
+		private void butTake_Click(object sender, EventArgs e)
+		{
+			if (listBoxLevels.SelectedIndex > -1)
+			{
+				string level = listBoxLevels.Items[listBoxLevels.SelectedIndex].ToString();
+
+				if (maskedTextBox1.Text != "")
+				{
+                    var plane = parking.GetShipInParking(Convert.ToInt32(maskedTextBox1.Text) -1 );
+					Bitmap bmp = new Bitmap(pictureBoxTakePlane.Width, pictureBoxTakePlane.Height);
+					Graphics gr = Graphics.FromImage(bmp);
+					plane.sePosition(45, 50);
+					plane.drawShip(gr);
+					pictureBoxTakePlane.Image = bmp;
+					draw();
+				}
+			}
+		}
+
+		private void btnLevelDown_Click(object sender, EventArgs e)
+		{
+            parking.lvlDown();
+			listBoxLevels.SelectedIndex = parking.getCurentLvl;
+			draw();
+
+		}
+
+		private void btnLevelUp_Click(object sender, EventArgs e)
+		{
+            parking.lvlUp();
+			listBoxLevels.SelectedIndex = parking.getCurentLvl;
+			draw();
+
+		}
+	}
 }
