@@ -8,6 +8,6 @@ namespace Labs
 {
 	class Oil
 	{
-
+		public bool isEmpty;
 	}
 }

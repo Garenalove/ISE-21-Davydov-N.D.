@@ -8,5 +8,16 @@ namespace Labs
 {
 	class Cutlets
 	{
+		public int count
+		{
+			get
+			{
+				return count;
+			}
+			set
+			{
+				count = value;
+			}
+		}
 	}
 }
